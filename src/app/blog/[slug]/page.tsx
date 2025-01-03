@@ -13,11 +13,11 @@ interface Comment {
 }
 
 interface BlogPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   console.log("Slug passed:", slug);
 
   // Updated query to fetch blog data and comments
