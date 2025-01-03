@@ -6,7 +6,7 @@ interface Blog {
   title: string;
   summary: string;
   slug: { current: string };
-  image: { url: string }; // More specific type for image
+  image: { _type: string; asset: { _ref: string } }; // More specific type for image
 }
 
 interface BlogProps {
@@ -15,7 +15,7 @@ interface BlogProps {
 
 export default function BlogCard({ blog }: BlogProps) {
   // Ensure the fallback image is available in the public folder or provide an external link.
-  const imageUrl = urlForImage(blog.image)?.url() || "/placeholder.jpg"; // fallback if no image
+  const imageUrl = blog.image ? urlForImage(blog.image)?.url() : "/placeholder.jpg"; // fallback if no image
 
   return (
     <section className="flex flex-col justify-between h-[480px] rounded bg-light/90 dark:bg-dark/40 shadow-md shadow-gray-300 dark:shadow-black/80 group hover:scale-105 transition-transform ease-out duration-700">
@@ -48,3 +48,4 @@ export default function BlogCard({ blog }: BlogProps) {
     </section>
   );
 }
+
