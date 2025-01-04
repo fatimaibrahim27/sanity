@@ -25,7 +25,7 @@ const Aboutus = () => {
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">The Team</h2>
           <p className="text-gray-700 font-semibold mb-6">
-            <i>Our team is made up of passionate adventurers, nature lovers, and experienced writers who are dedicated to bringing you the best content about mountain life. Whether it's through breathtaking photography, detailed trail guides, or personal stories, we strive to create content that resonates with our readers.</i>
+            <i>Our team is made up of passionate adventurers, nature lovers, and experienced writers who are dedicated to bringing you the best content about mountain life. Whether it&apos;s through breathtaking photography, detailed trail guides, or personal stories, we strive to create content that resonates with our readers.</i>
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -66,7 +66,7 @@ const Aboutus = () => {
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">What to Expect</h2>
           <p className="text-gray-700 mb-6">
-            On our blog, you'll find a wide range of topics related to mountains, including:
+            On our blog, you&apos;ll find a wide range of topics related to mountains, including:
           </p>
           <ul className="list-disc list-inside text-gray-700">
             <li>Hiking and trekking guides</li>
