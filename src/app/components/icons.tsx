@@ -5,7 +5,7 @@ interface IconProps {
   fill?: string;
 }
 
-export const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps) => (
+const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="328 355 335 276"
@@ -19,7 +19,7 @@ export const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps
   </svg>
 );
 
-export const Youtube = ({ className = "", fill = "#f61c0d", ...props }: IconProps) => (
+const Youtube = ({ className = "", fill = "#f61c0d", ...props }: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -34,7 +34,7 @@ export const Youtube = ({ className = "", fill = "#f61c0d", ...props }: IconProp
   </svg>
 );
 
-export const Github = ({ className = "", fill = "#000000", ...rest }: IconProps) => (
+const Github = ({ className = "", fill = "#000000", ...rest }: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 28 28"
@@ -48,8 +48,58 @@ export const Github = ({ className = "", fill = "#000000", ...rest }: IconProps)
   </svg>
 );
 
-export const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps) => (
+const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    viewBox
+    viewBox="0 0 32 32"
+    className={className}
+    {...rest}
+  >
+    <circle cx={16} cy={16} r={14} fill="url(#a)" />
+    <path
+      fill="#fff"
+      d="m21.214 20.282.622-3.952h-3.89v-2.563c0-1.081.542-2.136 2.284-2.136H22V8.267S20.395 8 18.86 8c-3.205 0-5.298 1.893-5.298 5.318v3.012H10v3.952h3.562v9.552a14.468 14.468 0 0 0 4.383 0v-9.552h3.269Z"
+    />
+    <defs>
+      <linearGradient
+        id="a"
+        x1={16}
+        x2={16}
+        y1={2}
+        y2={29.917}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#18ACFE" />
+        <stop offset={1} stopColor="#0163E0" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+const Linkedin = ({ className = "", fill = "#0b86ca", ...rest }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    className={className}
+    {...rest}
+  >
+    <g data-name="Layer 2">
+      <g data-name="Layer 1">
+        <rect width={28.87} height={28.87} fill={fill} rx={6.48} ry={6.48} />
+        <path
+          fill="#fff"
+          d="M8 12h3v9.68H8zm1.53-4.81a1.74 1.74 0 1 1-1.74 1.75 1.74 1.74 0 0 1 1.74-1.75M12.92 12h2.89v1.32a3.16 3.16 0 0 1 2.85-1.56c3 0 3.61 2 3.61 4.61v5.31h-3V17c0-1.12 0-2.57-1.56-2.57s-1.8 1.22-1.8 2.48v4.79h-3z"
+        />
+      </g>
+    </g>
+  </svg>
+);
+
+export default {
+  Twitter,
+  Youtube,
+  Github,
+  Facebook,
+  Linkedin
+};
