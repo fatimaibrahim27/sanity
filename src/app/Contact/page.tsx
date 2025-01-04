@@ -10,18 +10,24 @@ const schema = yup.object({
   message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters'),
 }).required();
 
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
 const Contact = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
   const [formStatus, setFormStatus] = useState('');
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormData) => {
     try {
       console.log(data); // You can replace this with an API call
       setFormStatus('Form submitted successfully!');
       reset();
-    } catch (error) {
+    } catch {
       setFormStatus('Submission failed. Please try again.');
     }
   };
@@ -29,7 +35,7 @@ const Contact = () => {
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
       <h1 className="text-3xl font-semibold text-center text-gray-800 mb-4">Contact Us</h1>
-      <p className="text-center text-gray-600 mb-6">We'd love to hear from you. Please fill out the form below!</p>
+      <p className="text-center text-gray-600 mb-6">We&apos;d love to hear from you. Please fill out the form below!</p>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="form-group">
@@ -63,7 +69,6 @@ const Contact = () => {
             className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             {...register('message')}
             placeholder="Your message"
-        
           />
           {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
         </div>

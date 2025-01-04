@@ -1,15 +1,19 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { urlForImage } from "../../sanity/lib/image";
+import { urlForImage } from "@/sanity/lib/image";
 
-
-interface BlogProps {
-  blog: blog;
+interface Blog {
+  title: string;
+  summary: string;
+  slug: { current: string };
+  image: { url: string }; // More specific type for image
 }
 
-export default function BlogCard({ blog }:any) {
+interface BlogProps {
+  blog: Blog;
+}
+
+export default function BlogCard({ blog }: BlogProps) {
   // Ensure the fallback image is available in the public folder or provide an external link.
   const imageUrl = urlForImage(blog.image)?.url() || "/placeholder.jpg"; // fallback if no image
 
@@ -18,9 +22,9 @@ export default function BlogCard({ blog }:any) {
       {/* Image Section */}
       <div className="relative max-h-76 flex-1">
         <Image
-          src={imageUrl}
+          src={imageUrl} // Ensure this is a valid string URL
           alt={blog.title || "Blog Image"}
-          fill
+          layout="fill" // Ensure layout is defined properly
           className="object-cover rounded-t"
         />
       </div>

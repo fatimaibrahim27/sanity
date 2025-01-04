@@ -15,7 +15,7 @@ const Navbar = () => {
     <header className="flex items-center justify-between py-2 border-b-2 border-accentDarkSecondary sticky top-0 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10">
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link href="/" className="text-3xl font-bold text-dark dark:text-light">
-          Fatima's<span className="text-3xl text-accentDarkPrimary">Blog</span>
+          Fatima&apos;s<span className="text-3xl text-accentDarkPrimary">Blog</span>
         </Link>
         <div className="hidden md:flex md:items-center md:gap-x-6">
           <Link href="/" className="text-dark dark:text-light">
