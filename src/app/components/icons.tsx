@@ -5,56 +5,57 @@ interface IconProps {
   fill?: string;
 }
 
-const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps) => (
+// Add `React.SVGProps<SVGSVGElement>` to ensure that the rest of the props are properly typed
+const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="328 355 335 276"
     className={className}
-    {...rest}  {/* Correctly using spread operator */}
+    {...rest}
   >
     <path
       d="M630 425a195 195 0 0 1-299 175 142 142 0 0 0 97-30 70 70 0 0 1-58-47 70 70 0 0 0 31-2 70 70 0 0 1-57-66 70 70 0 0 0 28 5 70 70 0 0 1-18-90 195 195 0 0 0 141 72 67 67 0 0 1 116-62 117 117 0 0 0 43-17 65 65 0 0 1-31 38 117 117 0 0 0 39-11 65 65 0 0 1-32 35Z"
-      fill={fill}  {/* Using the fill prop correctly */}
+      fill={fill}
     />
   </svg>
 );
 
-const Youtube = ({ className = "", fill = "#f61c0d", ...props }: IconProps) => (
+const Youtube = ({ className = "", fill = "#f61c0d", ...props }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
     viewBox="0 0 461.001 461.001"
     className={className}
-    {...props}  {/* Correct spread usage */}
+    {...props}
   >
     <path
       d="M365.257 67.393H95.744C42.866 67.393 0 110.259 0 163.137v134.728c0 52.878 42.866 95.744 95.744 95.744h269.513c52.878 0 95.744-42.866 95.744-95.744V163.137c0-52.878-42.866-95.744-95.744-95.744zm-64.751 169.663-126.06 60.123c-3.359 1.602-7.239-.847-7.239-4.568V168.607c0-3.774 3.982-6.22 7.348-4.514l126.06 63.881c3.748 1.899 3.683 7.274-.109 9.082z"
-      fill={fill}  {/* Correctly using fill */}
+      fill={fill}
     />
   </svg>
 );
 
-const Github = ({ className = "", fill = "#000000", ...rest }: IconProps) => (
+const Github = ({ className = "", fill = "#000000", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 28 28"
     className={className}
-    {...rest}  {/* Correct spread usage */}
+    {...rest}
   >
     <path
       d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-      fill={fill}  {/* Correctly using fill */}
+      fill={fill}
     />
   </svg>
 );
 
-const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps) => (
+const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 32 32"
     className={className}
-    {...rest}  {/* Correct spread usage */}
+    {...rest}
   >
     <circle cx={16} cy={16} r={14} fill="url(#a)" />
     <path
@@ -77,12 +78,12 @@ const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps) => (
   </svg>
 );
 
-const Linkedin = ({ className = "", fill = "#0b86ca", ...rest }: IconProps) => (
+const Linkedin = ({ className = "", fill = "#0b86ca", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
     className={className}
-    {...rest}  {/* Correct spread usage */}
+    {...rest}
   >
     <g data-name="Layer 2">
       <g data-name="Layer 1">
@@ -101,5 +102,5 @@ export default {
   Youtube,
   Github,
   Facebook,
-  Linkedin,
+  Linkedin
 };
