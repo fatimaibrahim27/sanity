@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const Aboutus = () => {
   return (
     <div className="bg-gray-100 py-16">
@@ -11,27 +13,51 @@ const Aboutus = () => {
             </p>
           </div>
           <div>
-            <img src="/sunset.jpg" alt="Mountain" className="rounded-lg shadow-lg w-full" />
+            <Image 
+              src="/sunset.jpg" 
+              alt="Mountain" 
+              className="rounded-lg shadow-lg w-full" 
+              width={600} 
+              height={400} 
+            />
           </div>
         </div>
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">The Team</h2>
           <p className="text-gray-700 font-semibold mb-6">
-           <i>Our team is made up of passionate adventurers, nature lovers, and experienced writers who are dedicated to bringing you the best content about mountain life. Whether it's through breathtaking photography, detailed trail guides, or personal stories, we strive to create content that resonates with our readers.</i>
+            <i>Our team is made up of passionate adventurers, nature lovers, and experienced writers who are dedicated to bringing you the best content about mountain life. Whether it's through breathtaking photography, detailed trail guides, or personal stories, we strive to create content that resonates with our readers.</i>
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <img src="/team3.jpg" alt="Team Member" className="rounded-full mx-auto mb-4 w-32 h-32" />
+              <Image 
+                src="/team3.jpg" 
+                alt="Team Member" 
+                className="rounded-full mx-auto mb-4" 
+                width={128} 
+                height={128} 
+              />
               <h3 className="text-xl font-medium text-gray-800">Team Member 1</h3>
               <p className="text-gray-600">Photographer</p>
             </div>
             <div className="text-center">
-              <img src="/team2.jpg" alt="Team Member" className="rounded-full mx-auto mb-4 w-32 h-32" />
+              <Image 
+                src="/team2.jpg" 
+                alt="Team Member" 
+                className="rounded-full mx-auto mb-4" 
+                width={128} 
+                height={128} 
+              />
               <h3 className="text-xl font-medium text-gray-800">Team Member 2</h3>
               <p className="text-gray-600">Writer</p>
             </div>
             <div className="text-center">
-              <img src="/team1.jpg" alt="Team Member" className="rounded-full mx-auto mb-4 w-32 h-32" />
+              <Image 
+                src="/team1.jpg" 
+                alt="Team Member" 
+                className="rounded-full mx-auto mb-4" 
+                width={128} 
+                height={128} 
+              />
               <h3 className="text-xl font-medium text-gray-800">Team Member 3</h3>
               <p className="text-gray-600">Guide</p>
             </div>

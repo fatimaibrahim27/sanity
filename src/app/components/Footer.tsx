@@ -6,7 +6,7 @@ const Footer = () => {
           <div className="w-full md:w-1/4 mb-8 md:mb-0">
             <h4 className="font-semibold text-lg mb-4">About Us</h4>
             <p>
-              Welcome to Your Mountain Blog, where we share the beauty and adventure of mountain life. Join us as we explore the peaks and valleys of the world's most stunning landscapes.
+              Welcome to Your Mountain Blog, where we share the beauty and adventure of mountain life. Join us as we explore the peaks and valleys of the world&apos;s most stunning landscapes.
             </p>
           </div>
           <div className="w-full md:w-1/4 mb-8 md:mb-0">

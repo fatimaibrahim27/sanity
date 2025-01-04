@@ -2,7 +2,15 @@ import { client } from "../../../sanity/lib/client";
 import { urlForImage } from "../../../sanity/lib/image";
 import { notFound } from "next/navigation";
 import { PortableText } from '@portabletext/react';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+import Image from 'next/image';
+
+// Define the Comment interface for proper typing
+interface Comment {
+  _id: string;
+  name: string;
+  email: string;
+  text: string;
+}
 
 interface BlogPageProps {
   params: { slug: string };
@@ -40,14 +48,16 @@ export default async function BlogPage({ params }: BlogPageProps) {
   return (
     <main className="container mx-auto p-4">
       <h1 className="text-3xl font-bold my-4">{blog.title}</h1>
-      
+
       {/* Blog Image */}
       {blog.image && (
         <div className="relative w-full h-96">
-          <img
+          <Image
             src={urlForImage(blog.image).url()}
             alt={blog.title}
-            className="rounded object-cover w-full h-full"
+            className="rounded object-cover"
+            width={1200}  // Set the desired width of the image
+            height={600}  // Set the desired height of the image
           />
         </div>
       )}
@@ -67,7 +77,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         {/* Display Comments */}
         {blog.comments && blog.comments.length > 0 ? (
           <ul className="space-y-4">
-            {blog.comments.map((comment: { _id: Key | null | undefined; name: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | Iterable<ReactNode> | null | undefined; email: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | Iterable<ReactNode> | null | undefined; text: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | Iterable<ReactNode> | null | undefined; }) => (
+            {blog.comments.map((comment: Comment) => (
               <li key={comment._id} className="border-b pb-4">
                 <p className="font-semibold">{comment.name} ({comment.email})</p>
                 <p>{comment.text}</p>
