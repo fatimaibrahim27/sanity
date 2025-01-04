@@ -1,0 +1,19 @@
+/* Tailwind Global Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Apply dark mode */
+html.light {
+  background-color: #fff;
+  color: #000;
+}
+
+html.dark {
+  background-color: #000;
+  color: #fff;
+}
