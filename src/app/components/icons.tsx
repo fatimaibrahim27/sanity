@@ -3,16 +3,14 @@ import * as React from "react";
 interface IconProps {
   className?: string;
   fill?: string;
-  // You can specify SVG props directly here if you need specific ones
-  [key: string]: any; // This will allow for any additional props to be passed
 }
 
-const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps) => (
+const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="328 355 335 276"
     className={className}
-    {...rest} // Spread the rest of the props into the svg
+    {...rest}
   >
     <path
       d="M630 425a195 195 0 0 1-299 175 142 142 0 0 0 97-30 70 70 0 0 1-58-47 70 70 0 0 0 31-2 70 70 0 0 1-57-66 70 70 0 0 0 28 5 70 70 0 0 1-18-90 195 195 0 0 0 141 72 67 67 0 0 1 116-62 117 117 0 0 0 43-17 65 65 0 0 1-31 38 117 117 0 0 0 39-11 65 65 0 0 1-32 35Z"
@@ -21,13 +19,13 @@ const Twitter = ({ className = "", fill = "#3ba9ee", ...rest }: IconProps) => (
   </svg>
 );
 
-const Youtube = ({ className = "", fill = "#f61c0d", ...rest }: IconProps) => (
+const Youtube = ({ className = "", fill = "#f61c0d", ...props }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
     viewBox="0 0 461.001 461.001"
     className={className}
-    {...rest}
+    {...props}
   >
     <path
       d="M365.257 67.393H95.744C42.866 67.393 0 110.259 0 163.137v134.728c0 52.878 42.866 95.744 95.744 95.744h269.513c52.878 0 95.744-42.866 95.744-95.744V163.137c0-52.878-42.866-95.744-95.744-95.744zm-64.751 169.663-126.06 60.123c-3.359 1.602-7.239-.847-7.239-4.568V168.607c0-3.774 3.982-6.22 7.348-4.514l126.06 63.881c3.748 1.899 3.683 7.274-.109 9.082z"
@@ -36,7 +34,7 @@ const Youtube = ({ className = "", fill = "#f61c0d", ...rest }: IconProps) => (
   </svg>
 );
 
-const Github = ({ className = "", fill = "#000000", ...rest }: IconProps) => (
+const Github = ({ className = "", fill = "#000000", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 28 28"
@@ -50,7 +48,7 @@ const Github = ({ className = "", fill = "#000000", ...rest }: IconProps) => (
   </svg>
 );
 
-const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps) => (
+const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -79,7 +77,7 @@ const Facebook = ({ className = "", fill = "#1877F2", ...rest }: IconProps) => (
   </svg>
 );
 
-const Linkedin = ({ className = "", fill = "#0b86ca", ...rest }: IconProps) => (
+const Linkedin = ({ className = "", fill = "#0b86ca", ...rest }: IconProps & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
@@ -98,10 +96,12 @@ const Linkedin = ({ className = "", fill = "#0b86ca", ...rest }: IconProps) => (
   </svg>
 );
 
-export default {
+const Icons = {
   Twitter,
   Youtube,
   Github,
   Facebook,
   Linkedin
 };
+
+export default Icons;
