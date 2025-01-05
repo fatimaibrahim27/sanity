@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import Link from "next/link";
 import { Twitter, Youtube, Github, Facebook, Linkedin } from "./Socialmedia";  // Make sure this file exists and has the icons defined
