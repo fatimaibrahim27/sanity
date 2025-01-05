@@ -1,3 +1,4 @@
+// page.tsx
 import { client } from "../sanity/lib/client";
 import BlogCard from "@/app/components/Blogcard";
 
@@ -9,7 +10,7 @@ interface Blog {
   title: string;
   slug: { current: string };  // Updated to match the structure of the slug
   summary: string;
-  image: { _type: string; asset: { _ref: string } };  // More specific type for image
+  image: string;
   content: string;
   author: string;
 }
@@ -42,4 +43,3 @@ export default async function Home() {
     </div>
   );
 }
-
