@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { urlForImage } from "@/sanity/lib/image";
+import { urlForImage } from "@/sanity/lib/image"; // Ensure this is properly defined
 
 interface Blog {
   title: string;
@@ -23,8 +23,8 @@ export default function BlogCard({ blog }: BlogProps) {
       <div className="relative max-h-76 flex-1">
         <Image
           src={imageUrl} // Ensure this is a valid string URL
-          alt={blog.title || "Blog Image"}
-          layout="fill" // Ensure layout is defined properly
+          alt={blog.title || "Blog Image"} // More descriptive alt text if title is missing
+          layout="fill" // Ensures the image fills the parent container
           className="object-cover rounded-t"
         />
       </div>
@@ -32,7 +32,7 @@ export default function BlogCard({ blog }: BlogProps) {
       {/* Title and Summary */}
       <div className="flex flex-col justify-between gap-y-4 p-4">
         <h2 className="text-lg font-semibold line-clamp-2 text-dark dark:text-light leading-tight mb-2">
-          {blog.title || "Mountains Blog"} {/* Display fallback title if none */}
+          {blog.title || "Untitled Blog"} {/* Display fallback title if none */}
         </h2>
         <p className="text-dark/70 dark:text-light/70 line-clamp-3">
           {blog.summary || "No summary available."} {/* Display fallback summary if none */}
@@ -48,4 +48,3 @@ export default function BlogCard({ blog }: BlogProps) {
     </section>
   );
 }
-
