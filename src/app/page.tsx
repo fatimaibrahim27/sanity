@@ -7,9 +7,9 @@ export const revalidate = 60; // seconds
 interface Blog {
   _id: string;
   title: string;
-  slug: string;
+  slug: { current: string };  // Updated to match the structure of the slug
   summary: string;
-  image: string;
+  image: { _type: string; asset: { _ref: string } };  // More specific type for image
   content: string;
   author: string;
 }
@@ -29,7 +29,6 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      
       <main className="flex-grow">
         <h1 className="text-2xl font-bold uppercase my-12 text-center text-dark dark:text-light sm:text-3xl lg:text-5xl">
           Most Recent Blog
@@ -43,3 +42,4 @@ export default async function Home() {
     </div>
   );
 }
+
