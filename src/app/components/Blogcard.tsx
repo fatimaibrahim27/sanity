@@ -1,50 +1,45 @@
-import Image from "next/image";
-import Link from "next/link";
-import { urlForImage } from "@/sanity/lib/image"; // Ensure this is properly defined
+// page.tsx
+import { client } from "../sanity/lib/client";
+import BlogCard from "@/app/components/Blogcard";
 
+export const revalidate = 60; // seconds
+
+// Define the type for the blog
 interface Blog {
+  _id: string;
   title: string;
+  slug: { current: string };  // Updated to match the structure of the slug
   summary: string;
-  slug: { current: string };
-  image: { _type: string; asset: { _ref: string } }; // More specific type for image
+  image: string;
+  content: string;
+  author: string;
 }
 
-interface BlogProps {
-  blog: Blog;
-}
+export default async function Home() {
+  const query = `*[_type == "blog"] | order(_createdAt asc) {
+    _id, title, slug, summary, image, content, author
+  }`;
 
-export default function BlogCard({ blog }: BlogProps) {
-  // Ensure the fallback image is available in the public folder or provide an external link.
-  const imageUrl = blog.image ? urlForImage(blog.image)?.url() : "/placeholder.jpg"; // fallback if no image
+  // Fetch blogs from Sanity
+  const blogs: Blog[] = await client.fetch(query);
+
+  // If no blogs are found, show a message
+  if (!blogs.length) {
+    return <div>No blogs found</div>; // Optionally display a message
+  }
 
   return (
-    <section className="flex flex-col justify-between h-[480px] rounded bg-light/90 dark:bg-dark/40 shadow-md shadow-gray-300 dark:shadow-black/80 group hover:scale-105 transition-transform ease-out duration-700">
-      {/* Image Section */}
-      <div className="relative max-h-76 flex-1">
-        <Image
-          src={imageUrl} // Ensure this is a valid string URL
-          alt={blog.title || "Blog Image"} // More descriptive alt text if title is missing
-          layout="fill" // Ensures the image fills the parent container
-          className="object-cover rounded-t"
-        />
-      </div>
-
-      {/* Title and Summary */}
-      <div className="flex flex-col justify-between gap-y-4 p-4">
-        <h2 className="text-lg font-semibold line-clamp-2 text-dark dark:text-light leading-tight mb-2">
-          {blog.title || "Untitled Blog"} {/* Display fallback title if none */}
-        </h2>
-        <p className="text-dark/70 dark:text-light/70 line-clamp-3">
-          {blog.summary || "No summary available."} {/* Display fallback summary if none */}
-        </p>
-
-        {/* Read More dynamic Link */}
-        <Link href={`/blog/${blog.slug.current}`}>
-          <span className="block px-4 py-1 text-center bg-accentDarkSecondary rounded text-dark font-semibold mt-4">
-            Read More
-          </span>
-        </Link>
-      </div>
-    </section>
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow">
+        <h1 className="text-2xl font-bold uppercase my-12 text-center text-dark dark:text-light sm:text-3xl lg:text-5xl">
+          Most Recent Blog
+        </h1>
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {blogs.map((blog) => (
+            <BlogCard blog={blog} key={blog._id} />
+          ))}
+        </section>
+      </main>
+    </div>
   );
 }
