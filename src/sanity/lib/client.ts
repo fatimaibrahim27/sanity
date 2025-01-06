@@ -1,10 +1,9 @@
-import { createClient } from "next-sanity";
+// sanity/lib/client.js
+import { createClient } from 'next-sanity';
 
-export const config = {
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
-  apiVersion: "2023-01-01", // Use the current date or the one you set in Sanity
-  useCdn: process.env.NODE_ENV === "production",
-};
-
-export const client = createClient(config);
+export const client = createClient({
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET,
+  apiVersion: process.env.SANITY_API_VERSION,
+  useCdn: process.env.NODE_ENV === 'production',
+});
