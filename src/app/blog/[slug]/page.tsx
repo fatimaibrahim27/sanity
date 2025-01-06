@@ -1,22 +1,10 @@
-import { client } from "../../../sanity/lib/client";
-import { urlForImage } from "../../../sanity/lib/image";
-import { notFound } from "next/navigation";
-import { PortableText } from '@portabletext/react';
-import Image from 'next/image';
-
-interface Comment {
-  _id: string;
-  name: string;
-  email: string;
-  text: string;
-}
-
 interface BlogPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const { slug } = params;
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   console.log("Slug passed:", slug);
 
   const query = `*[_type == "blog" && slug.current == $slug][0] {
@@ -40,7 +28,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   if (!blog) {
     console.log("Blog not found");
     notFound();
-    return null; // Ensure you return something if the page is not found
+    return null;
   }
 
   const imageUrl = blog.image ? urlForImage(blog.image).url() : null;
@@ -50,7 +38,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
     <main className="container mx-auto p-4">
       <h1 className="text-3xl font-bold my-4">{blog.title}</h1>
 
-      {/* Blog Image */}
       {imageUrl && (
         <div className="relative w-full h-96">
           <Image
@@ -63,15 +50,12 @@ export default async function BlogPage({ params }: BlogPageProps) {
         </div>
       )}
 
-      {/* Blog Summary */}
       <p className="my-4">{blog.summary}</p>
 
-      {/* Blog Content */}
       <div>
         <PortableText value={blog.content} />
       </div>
 
-      {/* Comments Section */}
       <section className="mt-8">
         <h2 className="text-xl font-bold">Comments</h2>
 
