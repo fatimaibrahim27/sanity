@@ -1,3 +1,4 @@
+import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import { client } from "../../../sanity/lib/client";
 import { urlForImage } from "../../../sanity/lib/image";
 import { notFound } from "next/navigation";
@@ -12,12 +13,19 @@ interface Comment {
 }
 
 interface BlogPageProps {
-  params: { slug: string };
+  blog: {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    summary: string;
+    image: any;
+    content: any;
+    comments: Comment[];
+  };
 }
 
-export default async function BlogPage({ params }: BlogPageProps) {
-  const { slug } = params;
-  console.log("Slug passed:", slug);
+export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<BlogPageProps>> {
+  const { slug } = context.params as { slug: string }; // Get slug from the URL params
 
   const query = `*[_type == "blog" && slug.current == $slug][0] {
     _id,
@@ -35,16 +43,20 @@ export default async function BlogPage({ params }: BlogPageProps) {
   }`;
 
   const blog = await client.fetch(query, { slug });
-  console.log("Fetched Blog:", blog);
 
   if (!blog) {
-    console.log("Blog not found");
-    notFound();
-    return null;
+    return { notFound: true };
   }
 
+  return {
+    props: {
+      blog,
+    },
+  };
+}
+
+export default function BlogPage({ blog }: BlogPageProps) {
   const imageUrl = blog.image ? urlForImage(blog.image).url() : null;
-  console.log("Image URL:", imageUrl);
 
   return (
     <main className="container mx-auto p-4">
