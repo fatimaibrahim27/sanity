@@ -1,10 +1,22 @@
+import { client } from "../../../sanity/lib/client";
+import { urlForImage } from "../../../sanity/lib/image";
+import { notFound } from "next/navigation";
+import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
+
+interface Comment {
+  _id: string;
+  name: string;
+  email: string;
+  text: string;
+}
+
 interface BlogPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
+  const { slug } = params;
   console.log("Slug passed:", slug);
 
   const query = `*[_type == "blog" && slug.current == $slug][0] {
