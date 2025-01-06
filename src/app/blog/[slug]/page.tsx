@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 
-// Define the Comment interface for proper typing
 interface Comment {
   _id: string;
   name: string;
@@ -13,14 +12,13 @@ interface Comment {
 }
 
 interface BlogPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   console.log("Slug passed:", slug);
 
-  // Updated query to fetch blog data and comments
   const query = `*[_type == "blog" && slug.current == $slug][0] {
     _id,
     title,
@@ -42,22 +40,25 @@ export default async function BlogPage({ params }: BlogPageProps) {
   if (!blog) {
     console.log("Blog not found");
     notFound();
-    return null; // Ensure you return something if the page is not found
+    return null;
   }
+
+  const imageUrl = blog.image ? urlForImage(blog.image).url() : null;
+  console.log("Image URL:", imageUrl);
 
   return (
     <main className="container mx-auto p-4">
       <h1 className="text-3xl font-bold my-4">{blog.title}</h1>
 
       {/* Blog Image */}
-      {blog.image && (
+      {imageUrl && (
         <div className="relative w-full h-96">
           <Image
-            src={urlForImage(blog.image).url()}
+            src={imageUrl}
             alt={blog.title}
             className="rounded object-cover"
-            width={1200}  // Set the desired width of the image
-            height={600}  // Set the desired height of the image
+            width={1200}
+            height={600}
           />
         </div>
       )}
@@ -74,7 +75,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <section className="mt-8">
         <h2 className="text-xl font-bold">Comments</h2>
 
-        {/* Display Comments */}
         {blog.comments && blog.comments.length > 0 ? (
           <ul className="space-y-4">
             {blog.comments.map((comment: Comment) => (
@@ -88,9 +88,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
           <p>No comments yet. Be the first to comment!</p>
         )}
       </section>
-
-      {/* Comment Form (Optional) */}
-      {/* This is where you'd include a form to submit new comments */}
     </main>
   );
 }
