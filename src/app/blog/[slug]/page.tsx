@@ -40,7 +40,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   if (!blog) {
     console.log("Blog not found");
     notFound();
-    return null;
+    return null; // Ensure you return something if the page is not found
   }
 
   const imageUrl = blog.image ? urlForImage(blog.image).url() : null;
