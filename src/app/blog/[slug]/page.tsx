@@ -11,8 +11,22 @@ interface Comment {
   text: string;
 }
 
+interface Blog {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  summary: string;
+  image: any;
+  content: any;
+  comments: Comment[];
+}
+
+interface BlogPageProps {
+  params: { slug: string };
+}
+
 // The `params` will be automatically inferred by Next.js
-export default async function BlogPage({ params }: { params: { slug: string } }) {
+export default async function BlogPage({ params }: BlogPageProps) {
   const { slug } = params;
   console.log("Slug passed:", slug);
 
@@ -32,7 +46,7 @@ export default async function BlogPage({ params }: { params: { slug: string } })
     }
   }`;
 
-  const blog = await client.fetch(query, { slug });
+  const blog: Blog | null = await client.fetch(query, { slug });
 
   // If no blog is found, trigger 404 page
   if (!blog) {
