@@ -1,8 +1,9 @@
+import { GetServerSideProps } from 'next';
 import { client } from "../../../sanity/lib/client";
 import { urlForImage } from "../../../sanity/lib/image";
 import { notFound } from "next/navigation";
-import { PortableText, PortableTextBlock } from "@portabletext/react";
-import Image from "next/image";
+import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
 
 interface Comment {
   _id: string;
@@ -11,45 +12,23 @@ interface Comment {
   text: string;
 }
 
-interface Author {
-  bio: string;
-  image: {
-    asset: {
-      _ref: string;
-      _type: string;
-    };
-  };
-  name: string;
-}
-
 interface Blog {
   _id: string;
   title: string;
   slug: { current: string };
   summary: string;
-  image: {
-    asset: {
-      _ref: string;
-      _type: string;
-    };
-  };
-  content: PortableTextBlock[];
+  image: any;
+  content: any;
   comments: Comment[];
-  author: Author;
 }
 
 interface BlogPageProps {
-  params: {
-    slug: string;
-  };
+  blog: Blog | null;
 }
 
-// The `params` will be automatically inferred by Next.js
-export default async function BlogPage({ params }: BlogPageProps) {
-  const { slug } = params;
-  console.log("Slug passed:", slug);
+export const getServerSideProps: GetServerSideProps<BlogPageProps> = async (context) => {
+  const { slug } = context.params as { slug: string };
 
-  // Sanity query to fetch the blog data by slug
   const query = `*[_type == "blog" && slug.current == $slug][0] {
     _id,
     title,
@@ -67,10 +46,22 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
   const blog: Blog | null = await client.fetch(query, { slug });
 
-  // If no blog is found, trigger 404 page
   if (!blog) {
-    notFound();
-    return null; // Will display the 404 page
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      blog,
+    },
+  };
+};
+
+const BlogPage = ({ blog }: BlogPageProps) => {
+  if (!blog) {
+    return <p>Blog not found</p>;
   }
 
   const imageUrl = blog.image ? urlForImage(blog.image).url() : null;
@@ -115,4 +106,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
       </section>
     </main>
   );
-}
+};
+
+export default BlogPage;
