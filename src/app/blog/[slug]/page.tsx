@@ -39,7 +39,9 @@ interface Blog {
 }
 
 interface BlogPageProps {
-  params: { slug: string };
+  params: {
+    slug: string;
+  };
 }
 
 // The `params` will be automatically inferred by Next.js
