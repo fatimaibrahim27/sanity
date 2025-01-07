@@ -1,8 +1,8 @@
 import { client } from "../../../sanity/lib/client";
 import { urlForImage } from "../../../sanity/lib/image";
 import { notFound } from "next/navigation";
-import { PortableText } from '@portabletext/react';
-import Image from 'next/image';
+import { PortableText } from "@portabletext/react";
+import Image from "next/image";
 
 interface Comment {
   _id: string;
