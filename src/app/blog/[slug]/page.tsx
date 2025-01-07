@@ -1,7 +1,7 @@
 import { client } from "../../../sanity/lib/client";
 import { urlForImage } from "../../../sanity/lib/image";
 import { notFound } from "next/navigation";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextBlock } from "@portabletext/react";
 import Image from "next/image";
 
 interface Comment {
@@ -11,14 +11,31 @@ interface Comment {
   text: string;
 }
 
+interface Author {
+  bio: string;
+  image: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
+  name: string;
+}
+
 interface Blog {
   _id: string;
   title: string;
   slug: { current: string };
   summary: string;
-  image: any;
-  content: any;
+  image: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
+  content: PortableTextBlock[];
   comments: Comment[];
+  author: Author;
 }
 
 interface BlogPageProps {
