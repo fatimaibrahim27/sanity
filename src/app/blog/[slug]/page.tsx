@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import { client } from "../../../sanity/lib/client";
 import { urlForImage } from "../../../sanity/lib/image";
 import { notFound } from "next/navigation";
@@ -22,13 +21,7 @@ interface Blog {
   comments: Comment[];
 }
 
-interface BlogPageProps {
-  blog: Blog | null;
-}
-
-export const getServerSideProps: GetServerSideProps<BlogPageProps> = async (context) => {
-  const { slug } = context.params as { slug: string };
-
+async function fetchBlogData(slug: string): Promise<Blog | null> {
   const query = `*[_type == "blog" && slug.current == $slug][0] {
     _id,
     title,
@@ -44,24 +37,15 @@ export const getServerSideProps: GetServerSideProps<BlogPageProps> = async (cont
     }
   }`;
 
-  const blog: Blog | null = await client.fetch(query, { slug });
+  const blog = await client.fetch(query, { slug });
+  return blog || null;
+}
+
+const BlogPage = async ({ params }: { params: { slug: string } }) => {
+  const blog = await fetchBlogData(params.slug);
 
   if (!blog) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: {
-      blog,
-    },
-  };
-};
-
-const BlogPage = ({ blog }: BlogPageProps) => {
-  if (!blog) {
-    return <p>Blog not found</p>;
+    notFound();
   }
 
   const imageUrl = blog.image ? urlForImage(blog.image).url() : null;
